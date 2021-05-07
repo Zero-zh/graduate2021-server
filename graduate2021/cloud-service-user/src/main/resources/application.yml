@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: cloud-service-user
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/graduate2021?useUnicode=true&allowMultiQueries=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:53000/eureka/
+
+
+info:
+  app.name: 8082,cloud-service-user
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

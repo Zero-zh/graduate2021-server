@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-api-commons/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/MS-Order-Pull-Test/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-gateway-gateway9527/pom.xml" />
+        <option value="$PROJECT_DIR$/cloudalibaba-sentinel/pom.xml" />
+        <option value="$PROJECT_DIR$/controller-cloudas/pom.xml" />
+        <option value="$PROJECT_DIR$/feign-cloud-testaa/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-plus-test/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-test/pom.xml" />
+        <option value="$PROJECT_DIR$/ribbon-cloud-controllerte/pom.xml" />
+        <option value="$PROJECT_DIR$/test-feign80/pom.xml" />
+        <option value="$PROJECT_DIR$/test-signature/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

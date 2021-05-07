@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.graduate.loyee.mapper.AskAnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.graduate.loyee.entity.AskAnswer" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="reply_nums" property="replyNums" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.graduate.loyee.entity.AskAnswer" extends="BaseResultMap" >
+    <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `time`, title, `type`, author, remarks, reply_nums, `status`,`desc`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from ask_answer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ask_answer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.graduate.loyee.entity.AskAnswer" >
+    insert into ask_answer (id, `time`, title,
+      `type`, author, remarks,
+      reply_nums, `status`, `desc`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+      #{replyNums,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{desc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.graduate.loyee.entity.AskAnswer" >
+    insert into ask_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="type != null" >
+        `type`,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="replyNums != null" >
+        reply_nums,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="desc != null" >
+        `desc`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="replyNums != null" >
+        #{replyNums,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.graduate.loyee.entity.AskAnswer" >
+    update ask_answer
+    <set >
+      <if test="time != null" >
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="replyNums != null" >
+        reply_nums = #{replyNums,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        `desc` = #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.graduate.loyee.entity.AskAnswer" >
+    update ask_answer
+    set `time` = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      reply_nums = #{replyNums,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      `desc` = #{desc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.graduate.loyee.entity.AskAnswer" >
+    update ask_answer
+    set `time` = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      reply_nums = #{replyNums,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getAskAndAnswerData" parameterType="com.graduate.loyee.vo.QAndAVo.QueryAskAnswerVo" resultType="com.graduate.loyee.entity.AskAnswer">
+    SELECT <include refid="Base_Column_List" />
+    FROM ask_answer
+    <where>
+      <if test="type != null" >
+        AND `type` = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null" >
+      AND (title LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR author LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR `desc` LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%'))
+      </if>
+      AND `status` = 0
+    </where>
+    ORDER BY `time` DESC
+    LIMIT #{currentPage},#{showRowsPerPage}
+  </select>
+
+  <select id="selectRowCount" parameterType="com.graduate.loyee.vo.QAndAVo.QueryAskAnswerVo" resultType="integer">
+    SELECT COUNT(1)
+    FROM ask_answer
+    <where>
+      <if test="type != null" >
+        AND `type` = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null" >
+        AND (title LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR author LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR `desc` LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%'))
+      </if>
+      AND `status` = 0
+    </where>
+  </select>
+
+  <select id="selectByCondition" parameterType="com.graduate.loyee.entity.AskAnswer" resultType="com.graduate.loyee.entity.AskAnswer">
+    SELECT <include refid="Base_Column_List" />
+    FROM ask_answer
+    <where>
+      <if test="type != null" >
+        AND `type` = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="title != null" >
+        AND `title` = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="author != null" >
+        AND `author` = #{author,jdbcType=VARCHAR}
+      </if>
+      AND `status` = 0
+    </where>
+  </select>
+</mapper>

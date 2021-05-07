@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.graduate.loyee.mapper.CertificateMapper" >
+  <resultMap id="BaseResultMap" type="com.graduate.loyee.entity.Certificate" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="sponner" property="sponner" jdbcType="VARCHAR" />
+    <result column="object" property="object" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `time`, `name`, `location`, sponner, `object`, `status`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from certificate
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from certificate
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.graduate.loyee.entity.Certificate" >
+    insert into certificate (id, `time`, `name`, 
+      `location`, sponner, `object`, 
+      `status`)
+    values (#{id,jdbcType=VARCHAR}, #{time,jdbcType=DATE}, #{name,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{sponner,jdbcType=VARCHAR}, #{object,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.graduate.loyee.entity.Certificate" >
+    insert into certificate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="location != null" >
+        `location`,
+      </if>
+      <if test="sponner != null" >
+        sponner,
+      </if>
+      <if test="object != null" >
+        `object`,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponner != null" >
+        #{sponner,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null" >
+        #{object,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.graduate.loyee.entity.Certificate" >
+    update certificate
+    <set >
+      <if test="time != null" >
+        `time` = #{time,jdbcType=DATE},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponner != null" >
+        sponner = #{sponner,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null" >
+        `object` = #{object,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.graduate.loyee.entity.Certificate" >
+    update certificate
+    set `time` = #{time,jdbcType=DATE},
+      `name` = #{name,jdbcType=VARCHAR},
+      `location` = #{location,jdbcType=VARCHAR},
+      sponner = #{sponner,jdbcType=VARCHAR},
+      `object` = #{object,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getCertificateData" parameterType="com.graduate.loyee.entity.Certificate" resultType="com.graduate.loyee.entity.Certificate">
+    SELECT <include refid="Base_Column_List" />
+    FROM certificate
+    WHERE
+    status = 0
+  </select>
+</mapper>

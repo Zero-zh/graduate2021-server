@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloud-api-commons" />
+        <module name="cloud-service-user" />
+        <module name="demofd" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="akjsf" target="1.8" />
+      <module name="apiasdsd" target="1.8" />
+      <module name="asdxcz" target="1.7" />
+      <module name="cloud-config-3344" target="1.8" />
+      <module name="cloud-config-client3355" target="1.8" />
+      <module name="cloud-config-client3366" target="1.8" />
+      <module name="cloud-eureka-server7001" target="1.8" />
+      <module name="cloud-feign-hystrix" target="1.8" />
+      <module name="cloud-gateway-gateway9527" target="1.8" />
+      <module name="cloud-hystrix-dashboard9003" target="1.8" />
+      <module name="cloud-service-platform" target="1.8" />
+      <module name="cloud-zuul-zuul9527" target="1.8" />
+      <module name="cloudalibaba-sentinel" target="1.8" />
+      <module name="cloudapicommons" target="1.8" />
+      <module name="cloudeurekaserver7001" target="1.8" />
+      <module name="controller-cloudas" target="1.8" />
+      <module name="demofd" target="1.8" />
+      <module name="distributed-security-discovery" target="1.8" />
+      <module name="distributed-security-gateway" target="1.8" />
+      <module name="distributed-security-order" target="1.8" />
+      <module name="distributed-security-uaa" target="1.8" />
+      <module name="feign-cloud-testaa" target="1.8" />
+      <module name="jhasdKJSADF" target="1.8" />
+      <module name="MS-Order-Pull-Test" target="1.8" />
+      <module name="mybatis-plus-test" target="1.8" />
+      <module name="mybatis-test" target="1.8" />
+      <module name="proto-feign-client80" target="1.8" />
+      <module name="proto-feign-server8005" target="1.8" />
+      <module name="ribbon-cloud-controllerte" target="1.8" />
+      <module name="security-jwt-test" target="1.8" />
+      <module name="security-test" target="1.8" />
+      <module name="shiro-springboot" target="1.8" />
+      <module name="shiro-test" target="1.8" />
+      <module name="test" target="1.8" />
+      <module name="test-feign80" target="1.8" />
+      <module name="test-feign8002" target="1.8" />
+      <module name="test-signature" target="1.8" />
+      <module name="testaa-feign80" target="1.8" />
+      <module name="ZZZZZtestSuanFa" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demofd" options="-parameters" />
+    </option>
+  </component>
+</project>
