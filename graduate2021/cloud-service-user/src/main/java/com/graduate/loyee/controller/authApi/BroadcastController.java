@@ -92,5 +92,19 @@ public class BroadcastController {
         return result;
     }
 
+    @GetMapping("/homePageEpidemic")
+    @ApiOperation(value = "主页疫情通知查询")
+    public DataResult<List<Epidemic>> homePageEpidemic(){
+        DataResult<List<Epidemic>> result = DataResult.success();
+        try {
+            List<Epidemic> loginReturn = broadcastService.getEpidemicData(null);
+            result.setData(loginReturn);
+        }catch(Exception e){
+            log.info(e.getMessage());
+            return DataResult.fail(-1,e.getMessage());
+        }
+        return result;
+    }
+
 
 }

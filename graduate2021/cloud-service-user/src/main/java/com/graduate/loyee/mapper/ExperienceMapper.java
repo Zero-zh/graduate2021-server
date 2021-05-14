@@ -1,6 +1,7 @@
 package com.graduate.loyee.mapper;
 
 import com.graduate.loyee.entity.Experience;
+import com.graduate.loyee.vo.QAndAVo.QueryAskAnswerVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,5 +22,5 @@ public interface ExperienceMapper {
 
     int updateByPrimaryKey(Experience record);
 
-    List<Experience> getWorkExperience(Experience askAnswer);
+    List<Experience> getWorkExperience(QueryAskAnswerVo para);
 }

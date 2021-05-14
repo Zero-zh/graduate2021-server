@@ -155,10 +155,20 @@
       `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="getWorkExperience" parameterType="com.graduate.loyee.entity.Experience" resultType="com.graduate.loyee.entity.Experience">
+  <select id="getWorkExperience" parameterType="com.graduate.loyee.vo.QAndAVo.QueryAskAnswerVo" resultType="com.graduate.loyee.entity.Experience">
     SELECT <include refid="Base_Column_List" />
     FROM experience
-    WHERE
-    status = 0
+    <where>
+      <if test="type != null" >
+        AND `type` = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null" >
+        AND (title LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR author LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%')
+        OR `desc` LIKE CONCAT('%',#{content,jdbcType=VARCHAR},'%'))
+      </if>
+      AND `status` = 0
+    </where>
+    ORDER BY `time` DESC
   </select>
 </mapper>

@@ -29,8 +29,8 @@ public class QAndAService {
     private AskAnswerMapper askAnswerMapper;
 
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     private IdWorker idWorker = new IdWorker(0,0);
+
     public PageOutputVo<List<AskAnswer>> getAskAndAnswerData(QueryAskAnswerVo para) {
         PageOutputVo<List<AskAnswer>> result = new PageOutputVo<>();
         if(StringUtils.isEmpty(para.getType()))
@@ -60,10 +60,21 @@ public class QAndAService {
         return result;
     }
 
-    public List<Experience> getWorkExperience() {
-        Experience experience = new Experience();
-        experience.setStatus(0);
-        List<Experience> workExperienceList = experienceMapper.getWorkExperience(experience);
+    public List<Experience> getWorkExperience(QueryAskAnswerVo para) {
+        PageOutputVo<List<Experience>> result = new PageOutputVo<>();
+        if(StringUtils.isEmpty(para.getType()))
+            para.setType(null);
+        if(StringUtils.isEmpty(para.getContent()))
+            para.setContent(null);
+        if( StringUtils.isEmpty(para.getShowRowsPerPage())){
+            para.setShowRowsPerPage(10);
+        }
+        if(StringUtils.isEmpty(para.getCurrentPage())){
+            para.setCurrentPage(0);
+        }else{
+            para.setCurrentPage((para.getCurrentPage() -1) * para.getShowRowsPerPage());
+        }
+        List<Experience> workExperienceList = experienceMapper.getWorkExperience(para);
         return workExperienceList;
     }
 

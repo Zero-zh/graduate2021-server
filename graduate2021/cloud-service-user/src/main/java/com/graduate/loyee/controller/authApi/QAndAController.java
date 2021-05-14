@@ -40,21 +40,21 @@ public class QAndAController {
     @PostMapping("/addAskQuestion")
     @ApiOperation(value = "你问我答新增")
     public DataResult<List<AskAnswer>> askQuestion(AskQuestionVo para){
-        Boolean flag = true;
+//        Boolean flag = true;
         DataResult<List<AskAnswer>> result = DataResult.success();
         try {
             List<AskAnswer> loginReturn = qAndAService.askQuestion(para);
             result.setData(loginReturn);
         }catch(Exception e){
             log.info(e.getMessage());
-            flag = false;
-//            return DataResult.fail(-1,e.getMessage());
+//            flag = false;
+            return DataResult.fail(-1,"新增失败，数据库中已经存在该数据");
         }
-        if(!flag){
-            result.setCode(0);
-            result.setMsg("-1");
-            return result;
-        }
+//        if(!flag){
+//            result.setCode(0);
+//            result.setMessage("-1");
+//            return result;
+//        }
         return result;
     }
 
@@ -89,10 +89,10 @@ public class QAndAController {
 
     @GetMapping("/getWorkExperience")
     @ApiOperation(value = "经验之谈查询")
-    public DataResult<List<Experience>> getWorkExperience(){
+    public DataResult<List<Experience>> getWorkExperience(QueryAskAnswerVo para){
         DataResult<List<Experience>> result = DataResult.success();
         try {
-            List<Experience> loginReturn = qAndAService.getWorkExperience();
+            List<Experience> loginReturn = qAndAService.getWorkExperience(para);
             result.setData(loginReturn);
         }catch(Exception e){
             log.info(e.getMessage());

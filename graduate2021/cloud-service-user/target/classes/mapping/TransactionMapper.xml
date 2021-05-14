@@ -132,7 +132,7 @@
     WHERE
     status = 0
   </select>
-  <select id="selectByCondition" parameterType="com.graduate.loyee.vo.ResellVo.SelectTransByConditionVo"
+  <select id="selectByCondition" parameterType="com.graduate.loyee.vo.ResellVo.SelectDataByMysql"
           resultType="com.graduate.loyee.entity.Transaction">
     SELECT <include refid="Base_Column_List" />
     FROM transaction

@@ -5,12 +5,15 @@ import com.graduate.loyee.mapper.UserMapper;
 import com.graduate.loyee.utils.IdWorker.IdWorker;
 import com.graduate.loyee.utils.jwt.JwtUtil;
 import com.graduate.loyee.utils.jwt.PasswordUtils;
+import com.graduate.loyee.utils.numberWorker.RandomEmail;
 import com.graduate.loyee.utils.numberWorker.RandomString;
 import com.graduate.loyee.utils.redis.RedisUtil;
 import com.graduate.loyee.utils.result.BaseResponseCode;
 import com.graduate.loyee.utils.result.BusinessException;
+import com.graduate.loyee.vo.UserVo.ChangePasswordVo;
 import com.graduate.loyee.vo.UserVo.LoginReq;
 import com.graduate.loyee.vo.UserVo.LoginReturn;
+import com.graduate.loyee.vo.UserVo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,13 +93,20 @@ public class UserService {
         //前端清楚cookie,返回登录页面
     }
 
-    public LoginReturn getUserInfo() {
+    public UserInfoVo getUserInfo() {
     //        token.split()
-        LoginReturn loginReturn = new LoginReturn();
-        loginReturn.setToken(RedisUtil.get("token").toString());
-        loginReturn.setId(RedisUtil.get("Id").toString());
-        loginReturn.setUsername(RedisUtil.get("username").toString());
-        return loginReturn;
+//        LoginReturn loginReturn = new LoginReturn();
+//        loginReturn.setToken(RedisUtil.get("token").toString());
+//        loginReturn.setId(RedisUtil.get("Id").toString());
+//        loginReturn.setUsername(RedisUtil.get("username").toString());
+
+        String userId = RedisUtil.get("Id").toString();
+        User user = userMapper.selectByPrimaryKey(userId);
+        UserInfoVo userInfoVo = new UserInfoVo();
+        userInfoVo.setAccountNumber(user.getAccountNumber());
+        userInfoVo.setUserName(user.getUsername());
+        userInfoVo.setEmail(RandomEmail.getRandomString(userInfoVo.getAccountNumber()));
+        return userInfoVo;
     }
 
     public LoginReturn touristLogin() {
@@ -122,7 +132,7 @@ public class UserService {
 
 
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        String acct = "17820418132";
 //        String password = "110120";
 //        //判断密码对错
@@ -139,7 +149,53 @@ public class UserService {
 //            System.out.println("密码正确");
 //        }else
 //            System.out.println("密码错误");
-//
-//    }
+        String userId = RedisUtil.get("id").toString();
 
+
+    }
+
+    public void changePassword(ChangePasswordVo para) throws Exception{
+        //三者都不能为空
+        if(para.getBeforePassword().equals(para.getAfterPassword())){
+            //更改前后密码一致
+            throw new Exception("更改前后密码不能一致");
+        }else if(!para.getAfterPassword().equals(para.getConfirmedPassword())){
+            //密码与确认密码不一致
+            throw new Exception("密码与确认密码不一致");
+        }
+        //更改密码
+        User user = new User();
+//        user.setPassword(para.getConfirmedPassword());
+        user.setId(RedisUtil.get("Id").toString());
+
+        //判断原密码是否正确
+        try{
+            LoginReq loginReq = new LoginReq();
+            String hadLoginUserName = RedisUtil.get("username").toString();
+            User hadLogin = userMapper.selectByUserName(hadLoginUserName);
+            loginReq.setUsername(hadLogin.getAccountNumber());
+            loginReq.setPassword(para.getBeforePassword());
+            this.login(loginReq);
+        }catch (Exception e){
+            throw new Exception("原密码错误,请检查原密码");
+        }
+
+        user.setSalt(PasswordUtils.getSalt());
+        user.setPassword(PasswordUtils.encode(para.getConfirmedPassword(), user.getSalt()));
+        int i = userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public void changeUserName(String userName) throws Exception{
+        User user = new User();
+        user.setUsername(userName);
+        user.setId(RedisUtil.get("Id").toString());
+        //更新数据库
+        int i = userMapper.updateByPrimaryKeySelective(user);
+        //更新Redis数据
+        RedisUtil.del("username");
+        RedisUtil.setnx("username",user.getUsername());
+        if(i <= 0){
+            throw new Exception("未知错误");
+        }
+    }
 }

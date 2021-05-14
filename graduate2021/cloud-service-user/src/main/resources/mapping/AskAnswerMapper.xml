@@ -198,6 +198,9 @@
       <if test="author != null" >
         AND `author` = #{author,jdbcType=VARCHAR}
       </if>
+      <if test="remarks != null" >
+        AND `remarks` = #{remarks,jdbcType=VARCHAR}
+      </if>
       AND `status` = 0
     </where>
   </select>

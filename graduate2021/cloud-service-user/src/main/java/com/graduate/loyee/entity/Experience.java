@@ -1,12 +1,13 @@
 package com.graduate.loyee.entity;
 
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import lombok.Data;
 
 import java.io.Serializable;
 @Data
 public class Experience implements Serializable {
     private String id;
-
+    @DateTimeFormat("yyyy-MM-dd")
     private String time;
 
     private String title;

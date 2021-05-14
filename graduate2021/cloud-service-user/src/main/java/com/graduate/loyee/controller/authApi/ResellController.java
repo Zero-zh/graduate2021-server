@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +37,7 @@ public class ResellController {
         return result;
     }
 
-    @GetMapping("/selectByCondition")
+    @PostMapping("/selectByCondition")
     @ApiOperation(value = "根据条件查询商品")
     public DataResult<List<Transaction>> selectByCondition(SelectTransByConditionVo para){
         DataResult<List<Transaction>> result = DataResult.success();

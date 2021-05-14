@@ -1,7 +1,7 @@
 package com.graduate.loyee.mapper;
 
 import com.graduate.loyee.entity.Transaction;
-import com.graduate.loyee.vo.ResellVo.SelectTransByConditionVo;
+import com.graduate.loyee.vo.ResellVo.SelectDataByMysql;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +22,5 @@ public interface TransactionMapper {
 
     List<Transaction> getResellData(Transaction transaction);
 
-    List<Transaction> selectByCondition(SelectTransByConditionVo para);
+    List<Transaction> selectByCondition(SelectDataByMysql para);
 }

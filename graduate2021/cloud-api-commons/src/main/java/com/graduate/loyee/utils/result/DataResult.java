@@ -30,8 +30,8 @@ public class DataResult <T> implements Serializable{
     /**
      * 响应异常码详细信息
      */
-    @ApiModelProperty(value = "响应异常码详细信息", name = "msg")
-    private String msg;
+    @ApiModelProperty(value = "响应异常码详细信息", name = "message")
+    private String message;
 
 
     /**
@@ -44,46 +44,46 @@ public class DataResult <T> implements Serializable{
     public DataResult(int code, T data) {
         this.code = code;
         this.data = data;
-        this.msg=null;
+        this.message=null;
     }
 
 
-    public DataResult(int code, String msg, T data) {
+    public DataResult(int code, String message, T data) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.data = data;
     }
 
-    public DataResult(int code, String msg) {
+    public DataResult(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.data=null;
     }
 
 
     public DataResult() {
         this.code=BaseResponseCode.SUCCESS.getCode();
-        this.msg=BaseResponseCode.SUCCESS.getMsg();
+        this.message=BaseResponseCode.SUCCESS.getMsg();
         this.data=null;
     }
 
     public DataResult(T data) {
         this.data = data;
         this.code=BaseResponseCode.SUCCESS.getCode();
-        this.msg=BaseResponseCode.SUCCESS.getMsg();
+        this.message=BaseResponseCode.SUCCESS.getMsg();
     }
 
 
     public DataResult(ResponseCodeInterface responseCodeInterface) {
         this.data = null;
         this.code = responseCodeInterface.getCode();
-        this.msg = responseCodeInterface.getMsg();
+        this.message = responseCodeInterface.getMsg();
     }
 
     public DataResult(ResponseCodeInterface responseCodeInterface, T data) {
         this.data = data;
         this.code = responseCodeInterface.getCode();
-        this.msg = responseCodeInterface.getMsg();
+        this.message = responseCodeInterface.getMsg();
     }
     /**
      * 操作成功 data为null
@@ -111,8 +111,8 @@ public class DataResult <T> implements Serializable{
      * @return       com.xh.lesson.utils.DataResult<T>
      * @throws
      */
-    public static <T>DataResult fail(int code , String msg){
-        return new <T>DataResult(code,msg);
+    public static <T>DataResult fail(int code , String message){
+        return new <T>DataResult(code,message);
     }
 
     /**
@@ -153,13 +153,13 @@ public class DataResult <T> implements Serializable{
      * @UpdateDate:  2020/4/29 13:48
      * @Version:     0.0.1
      * @param code
-     * @param msg
+     * @param message
      * @param data
      * @return       com.xh.lesson.utils.DataResult
      * @throws
      */
-    public static <T>DataResult getResult(int code,String msg,T data){
-        return new <T>DataResult(code,msg,data);
+    public static <T>DataResult getResult(int code,String message,T data){
+        return new <T>DataResult(code,message,data);
     }
     /**
      *  自定义返回  data为null
@@ -169,12 +169,12 @@ public class DataResult <T> implements Serializable{
      * @UpdateDate:  2020/4/29 13:48
      * @Version:     0.0.1
      * @param code
-     * @param msg
+     * @param message
      * @return       com.xh.lesson.utils.DataResult
      * @throws
      */
-    public static <T>DataResult getResult(int code,String msg){
-        return new <T>DataResult(code,msg);
+    public static <T>DataResult getResult(int code,String message){
+        return new <T>DataResult(code,message);
     }
     /**
      * 自定义返回 入参一般是异常code枚举 data为空

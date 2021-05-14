@@ -67,18 +67,18 @@ public class UserPublicController {
         }
         return result;
     }
-    @GetMapping("/user/info")
-    @ApiOperation(value = "获取用户信息")
-    public DataResult<LoginReturn> login(){
-        DataResult<LoginReturn> result = DataResult.success();
-        try {
-            LoginReturn loginReturn = userOperationService.getUserInfo();
-            result.setData(loginReturn);
-        }catch(Exception e){
-            log.info(e.getMessage());
-            return DataResult.fail(-1,e.getMessage());
-        }
-        return result;
-    }
+//    @GetMapping("/user/info")
+//    @ApiOperation(value = "获取用户信息")
+//    public DataResult<LoginReturn> login(){
+//        DataResult<LoginReturn> result = DataResult.success();
+//        try {
+//            LoginReturn loginReturn = userOperationService.getUserInfo();
+//            result.setData(loginReturn);
+//        }catch(Exception e){
+//            log.info(e.getMessage());
+//            return DataResult.fail(-1,e.getMessage());
+//        }
+//        return result;
+//    }
 
 }
