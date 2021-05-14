@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduate.loyee.mapper.CampusMapper">
+  <resultMap id="BaseResultMap" type="com.graduate.loyee.entity.Campus">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="time" jdbcType="DATE" property="time" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="clicks" jdbcType="INTEGER" property="clicks" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, `time`, `type`, clicks, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from campus
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from campus
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.graduate.loyee.entity.Campus">
+    insert into campus (id, title, `time`,
+      `type`, clicks, `status`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{time,jdbcType=DATE},
+      #{type,jdbcType=INTEGER}, #{clicks,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.graduate.loyee.entity.Campus">
+    insert into campus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="clicks != null">
+        clicks,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="clicks != null">
+        #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.graduate.loyee.entity.Campus">
+    update campus
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="clicks != null">
+        clicks = #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.graduate.loyee.entity.Campus">
+    update campus
+    set title = #{title,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=DATE},
+      `type` = #{type,jdbcType=INTEGER},
+      clicks = #{clicks,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByCondition" parameterType="com.graduate.loyee.entity.Campus" resultType="com.graduate.loyee.entity.Campus">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM campus
+    WHERE
+    <if test="status != null">
+      `status` = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+      AND `type` = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="time != null">
+      AND `time` = #{time,jdbcType=TIMESTAMP}
+    </if>
+    ORDER BY time desc
+    LIMIT 5
+  </select>
+
+
+  <select id="selectHistoryData" parameterType="com.graduate.loyee.entity.Campus" resultType="com.graduate.loyee.entity.Campus">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM campus
+    WHERE
+    <if test="status != null">
+      `status` = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+      AND `type` = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="time != null">
+      AND `time` = #{time,jdbcType=TIMESTAMP}
+    </if>
+    ORDER BY clicks desc
+    LIMIT 5
+  </select>
+
+</mapper>

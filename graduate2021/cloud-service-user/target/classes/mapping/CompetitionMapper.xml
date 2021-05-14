@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.graduate.loyee.mapper.CompetitionMapper" >
+  <resultMap id="BaseResultMap" type="com.graduate.loyee.entity.Competition" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="sponsor" property="sponsor" jdbcType="VARCHAR" />
+    <result column="activity_object" property="activityObject" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `date`, activity_name, `location`, sponsor, activity_object, `status`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from competition
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from competition
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.graduate.loyee.entity.Competition" >
+    insert into competition (id, `date`, activity_name, 
+      `location`, sponsor, activity_object, 
+      `status`)
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{activityName,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{sponsor,jdbcType=VARCHAR}, #{activityObject,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.graduate.loyee.entity.Competition" >
+    insert into competition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="date != null" >
+        `date`,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="location != null" >
+        `location`,
+      </if>
+      <if test="sponsor != null" >
+        sponsor,
+      </if>
+      <if test="activityObject != null" >
+        activity_object,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null" >
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="activityObject != null" >
+        #{activityObject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.graduate.loyee.entity.Competition" >
+    update competition
+    <set >
+      <if test="date != null" >
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null" >
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="activityObject != null" >
+        activity_object = #{activityObject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.graduate.loyee.entity.Competition" >
+    update competition
+    set `date` = #{date,jdbcType=DATE},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      `location` = #{location,jdbcType=VARCHAR},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      activity_object = #{activityObject,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getCompetitionData" parameterType="com.graduate.loyee.entity.Competition" resultType="com.graduate.loyee.entity.Competition">
+    SELECT <include refid="Base_Column_List" />
+    FROM competition
+    WHERE
+    status = 0
+  </select>
+</mapper>

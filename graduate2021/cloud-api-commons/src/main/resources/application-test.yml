@@ -1,0 +1,70 @@
+server:
+  port: 6584
+
+
+#file:
+#  uploadFolder: /usr/local/uploadFile/image/          #windows    下文件保存路径 E:/uploadFile/image/ linux:/usr/local/uploadFile/image/
+#  staticAccessPath: /api/image/**                       #静态资源对外暴露的访问路径
+#  exportExcel: /usr/local/uploadFile/file/             #excel文件保存路径 E:/uploadFile/image/ linux:/usr/local/uploadFile/image/file/
+#  logoPath: /usr/local/uploadFile/image/               #微信小程序文件存储
+#  wxMini: /usr/local/uploadFile/wxMini/                #微信小程序文件存储
+#  wxfile: /usr/local/wxfile/
+##域名+端口
+#requestUrl:
+#  domainName:  http://text.colorkey.com    #https://mall.colorkey.com   http://47.113.97.130:8082
+#  frontDesk: https://game.colorkey.com   #红包c端域名
+#  replaceOldDomainName:  http://text.colorkey.com/api
+##落地页访问域名
+#landingPage:
+#  url:  http://more.colorkey.com
+spring:
+  application:
+    name: microservice-h2    #全部小写，注册于eureka server上的服务名称，不写名称显示为UNKNOW
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/graduate2021?useUnicode=true&allowMultiQueries=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  redis:
+    host: localhost
+    post: 6379
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: PT10S
+        max-idle: 30
+        min-idle: 1
+    timeout: PT10S
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java/** #重启目录
+      exclude: WEB-INF/**
+
+#mybatis:
+#  mapper-locations: classpath:mapping/*Mapper.xml
+#  type-aliases-package: com.graduate.loyee.entity
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#jackson:
+#  date-format: yyyy-MM-dd HH:mm:ss
+#  time-zone: GMT+8
+#
+##JWT 密钥
+#jwt:
+#  secretKey: 78944878877848fg)
+#  accessTokenExpireTime: PT2H
+#  refreshTokenExpireTime: PT8H
+#  refreshTokenExpireAppTime: P30D
+#  issuer: meishang.com
+#
+##swagger 开关
+#swagger2:
+#  enable: true
